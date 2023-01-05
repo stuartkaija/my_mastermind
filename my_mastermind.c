@@ -26,20 +26,21 @@ int main(int ac, char **av) {
     printf("Will you find the secret code?\nPlease enter a valid guess.\n");
 
     // accept user input, it needs to be numbers between 0 and 8 (or 9?), and the user must type in four numbers
-    // I believe this will be accepted in as chars, we can store them in a string, then convert to ints, or vice versa?
     char c;
-    int numbers[4];
+    char user_guess[4];
 
     for (int i = 0; i < 4; i++) {
         read(0, &c, 1);
-        numbers[i] = atoi(&c);
+        user_guess[i] = atoi(&c);
     }
 
     printf("The numbers you entered are: ");
     for (int i = 0; i < 4; i++) {
-        printf("%d ", numbers[i]);
+        printf("%d ", user_guess[i]);
     }
     printf("\n");
+
+    // at this point, we have a secret code that is randomly generated, and the ability for the user to input 4 digits, which is stored in another array
 
     return 0;
 }
