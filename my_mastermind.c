@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 int generate_number() {
     int num = rand() % 9;
@@ -9,29 +10,40 @@ int generate_number() {
 }
 
 int main(int ac, char **av) {
-    int secret_code[4] = {};
+    int secret_code[5] = {};
 
     srand(time(NULL));
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
+        if (i == 4) {
+            secret_code[i] = '\0';
+            printf("%d\n", secret_code[i]);
+            break;
+        }
         secret_code[i] = generate_number();
+        printf("%d\n", secret_code[i]);
     }
 
-    // return secret_code;
-    // currently generating random number that is ~10 digits long, we just need 4 digits, and likely it'll make the most sense to store them in an array
+    printf("Will you find the secret code?\nPlease enter a valid guess.\n");
+
+    // accept user input, it needs to be numbers between 0 and 8 (or 9?), and the user must type in four numbers
+    // I believe this will be accepted in as chars, we can store them in a string, then convert to ints, or vice versa?
+    char c;
+    int numbers[4];
+
+    for (int i = 0; i < 4; i++) {
+        read(0, &c, 1);
+        numbers[i] = atoi(&c);
+    }
+
+    printf("The numbers you entered are: ");
+    for (int i = 0; i < 4; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
 
     return 0;
 }
 
-// initial prompt, on launching the program via the command line, will also take in the secret code with the flag "-c" i.e. ./my_mastermind -c "0123" - if the c flag is omitted, a random code will be generated, i.e. if ac is 1, generate the random code - except we're using a make file, so not sure how this will be implemented yet
-
-// code to generate random 4 digits
-// code to accept player's input
-// code to compare player's input to secret code, checking and keeping track of well placed pieces and misplaced pieces
-    // check if input is correct i.e. digits from 0 to 8
-    // for well placed pieces - should this be stored globally, so as when it reaches 4 (i.e. all pieces are well placed), the player has won the game?
-
-// the count for well placed pieces and misplaced pieces will then be displayed to the player
-// code to keep track of rounds (there are 10 rounds)
 
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
