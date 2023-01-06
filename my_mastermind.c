@@ -1,26 +1,13 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include <unistd.h>
-
-int generate_number() {
-    int num = rand() % 9;
-    return num;
-}
+#include "my_mastermind.h"
 
 int main(int ac, char **av) {
-    int secret_code[5] = {};
+    char* code = malloc(4*sizeof(char));
+    char* secret_code = generate_code(code);
 
-    srand(time(NULL));
-    for (int i = 0; i < 5; i++) {
-        if (i == 4) {
-            secret_code[i] = '\0';
-            printf("%d\n", secret_code[i]);
-            break;
-        }
-        secret_code[i] = generate_number();
-        printf("%d\n", secret_code[i]);
+    printf("FROM MAIN\n");
+
+    for (int i = 0; i < strlen(secret_code); i++) {
+        printf("secret_code[%d]: %c \n", i, secret_code[i]);
     }
 
     printf("Will you find the secret code?\nPlease enter a valid guess.\n");
