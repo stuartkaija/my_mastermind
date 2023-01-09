@@ -7,11 +7,10 @@
 #include <time.h>
 #include <unistd.h>
 
-#define CODE_LEN 4
-
 bool my_isdigit(char character);
 int my_strlen(const char *param_1);
 char generate_number();
 char* generate_code(char* code);
+bool validate_user_input(char* param);
 
 #endif

@@ -32,14 +32,33 @@ char generate_number() {
 }
 
 // generate secret code
-char* generate_code(char* code) {
+char* generate_code(char* param) {
     int i = 0;
     srand(time(NULL));
-    printf("FROM GENERATE_CODE:\n");
     while (i < 4) {
-        code[i] = generate_number();
-        printf("code[%d]: %d \n", i, code[i]);
+        param[i] = generate_number();
         i++;
     }
-    return code;
+    return param;
 }
+
+// validate user input
+// accepts user input, checks that it has a length of four and is composed of digits between/including 0 and 8
+
+bool validate_user_input(char* param) {
+    if (my_strlen(param) != 4) {
+        // printf("Wrong input! Please enter a valid code\n");
+        return false;
+    }
+
+    for (int i = 0; i < 4; i++) {
+        if (param[i] < 48 || param[i] > 56) {
+            // printf("Wrong input! Please enter a valid code\n");
+            return false;
+        }
+    }
+    return true;
+}
+
+// function to compare user_guess to secret_code
+    // needs to check for and return number of correctly placed pieces and misplaced pieces
