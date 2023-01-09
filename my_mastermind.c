@@ -10,7 +10,6 @@ int main(int ac, char **av) {
 
     char* code = malloc(4 * sizeof(char));
     char* secret_code = malloc(4 * sizeof(char));
-    int rounds = 10;
 
     // * DEALING WITH COMMAND LINE INPUTS ------------------------------------------------------------
 
@@ -49,7 +48,7 @@ int main(int ac, char **av) {
     }
 
     // * PRINTING SECRET CODE TO CONSOLE ------------------------------------------------------------
-    // ! (remove for game)
+    // TODO remove for game
     printf("secret code: ASCII values\n");
     for (int i = 0; i < strlen(secret_code); i++) {
         printf("%c:%d ", secret_code[i], secret_code[i]);
@@ -61,44 +60,48 @@ int main(int ac, char **av) {
     printf("Will you find the secret code?\nPlease enter a valid guess.\n---\n");
 
     int attempts = 0;
+    int rounds = 10;
+
     while (attempts < rounds) {
         printf("Round %d\n", attempts);
 
-        char c;
-        char* user_guess = malloc(4 * sizeof(char));
+        // char c;
+        // char* user_guess = malloc(4 * sizeof(char));
+        // label:
 
-        for (int i = 0; i < 4; i++) {
-            read(0, &c, 1);
-            user_guess[i] = c;
-        }
+        // for (int i = 0; i < 4; i++) {
+        //     read(0, &c, 1);
+        //     user_guess[i] = c;
+        // }
 
-        // this prints the user input to the console
-        printf("Numbers entered: ASCII codes - \n");
-        for (int i = 0; i < 4; i++) {
-            printf("%c:%d ", user_guess[i], user_guess[i]);
-            // validate_user_input(user_guess, i);
+        // ! how can I store the user input read from the console using pointers? such that I can use my validte_user_input function to validate that it is correct? instead of what I have below, the same function but it takes a string instead...
+
+        char code[5];
+        int size;
+        label:
+        size = read(0, code, sizeof(code));
+
+        if (validate_user_input_string(code) != true) {
+            printf("Wrong input!\n");
+            goto label;
         }
-        printf("\n");
+        
+        // if (size != 5) {
+        //     printf("Wrong input!\n");
+        //     goto label;
+        // }
+
+        // for (int j = 0; j < 4; j++) {
+        //     if (code[j] < 48 || code[j] > 56) {
+        //         printf("Wrong input!\n");
+        //         goto label;
+        //     }
+        // }
+
+        printf("code was good, going to next round\n");
 
         attempts++;
     }
-    // // accept user input
-    // char c;
-    // char* user_guess = malloc(4 * sizeof(char));
-
-    // for (int i = 0; i < 4; i++) {
-    //     read(0, &c, 1);
-    //     user_guess[i] = c;
-    // }
-
-    // // this prints the user input to the console
-    // printf("Numbers entered: ASCII codes are:\n");
-    // for (int i = 0; i < 4; i++) {
-    //     printf("%c:%d ", user_guess[i], user_guess[i]);
-    //     // validate_user_input(user_guess, i);
-    // }
-    // printf("\n");
-
 
     return 0;
 }

@@ -60,6 +60,21 @@ bool validate_user_input(char* param) {
     return true;
 }
 
+bool validate_user_input_string(char param[]) {
+    if (strlen(param) != 5) {
+    // printf("Wrong input! Please enter a valid code\n");
+        return false;
+    }
+
+    for (int i = 0; i < 4; i++) {
+        if (param[i] < 48 || param[i] > 56) {
+            // printf("Wrong input! Please enter a valid code\n");
+            return false;
+        }
+    }
+    return true;
+}
+
 // function to compare user_guess to secret_code
     // accepts user_guess and secret_code
     // needs to check for and return number of correctly placed pieces and misplaced pieces
@@ -68,7 +83,7 @@ int test_user_input(char* guess, char* code) {
     int well_placed = 0;
     int misplaced = 0;
 
-    
+
 
     return 0;
 }
