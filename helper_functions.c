@@ -61,4 +61,14 @@ bool validate_user_input(char* param) {
 }
 
 // function to compare user_guess to secret_code
+    // accepts user_guess and secret_code
     // needs to check for and return number of correctly placed pieces and misplaced pieces
+
+int test_user_input(char* guess, char* code) {
+    int well_placed = 0;
+    int misplaced = 0;
+
+    
+
+    return 0;
+}
