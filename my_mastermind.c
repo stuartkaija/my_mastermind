@@ -11,7 +11,7 @@ int main(int ac, char **av) {
     char* code = malloc(4 * sizeof(char));
     char* secret_code = malloc(4 * sizeof(char));
 
-    // * DEALING WITH COMMAND LINE INPUTS ------------------------------------------------------------
+    // * DEALING WITH COMMAND LINE INPUTS --------------------------------------------------------------
 
     if (ac == 1) {
         printf("only 1 argument passed i.e. ./my_mastermind\n");
@@ -47,7 +47,7 @@ int main(int ac, char **av) {
         return 1;
     }
 
-    // * PRINTING SECRET CODE TO CONSOLE ------------------------------------------------------------
+    // * PRINTING SECRET CODE TO CONSOLE ---------------------------------------------------------------
     // TODO remove for game
     printf("secret code: ASCII values\n");
     for (int i = 0; i < strlen(secret_code); i++) {
@@ -55,7 +55,7 @@ int main(int ac, char **av) {
     }
     printf("\n");
 
-    // * PLAYING THE GAME --------------------------------------------------------------------------------
+    // * PLAYING THE GAME ------------------------------------------------------------------------------
 
     printf("Will you find the secret code?\nPlease enter a valid guess.\n---\n");
 
@@ -67,36 +67,35 @@ int main(int ac, char **av) {
 
         // char c;
         // char* user_guess = malloc(4 * sizeof(char));
+        // int i = 0;
         // label:
 
-        // for (int i = 0; i < 4; i++) {
+        // while (c != 10) {
         //     read(0, &c, 1);
         //     user_guess[i] = c;
+        //     i++;
         // }
 
-        // ! how can I store the user input read from the console using pointers? such that I can use my validte_user_input function to validate that it is correct? instead of what I have below, the same function but it takes a string instead...
-
-        char code[5];
-        int size;
-        label:
-        size = read(0, code, sizeof(code));
-
-        if (validate_user_input_string(code) != true) {
-            printf("Wrong input!\n");
-            goto label;
-        }
-        
-        // if (size != 5) {
+        // if (validate_user_input(user_guess) != true) {
         //     printf("Wrong input!\n");
         //     goto label;
         // }
 
-        // for (int j = 0; j < 4; j++) {
-        //     if (code[j] < 48 || code[j] > 56) {
-        //         printf("Wrong input!\n");
-        //         goto label;
-        //     }
-        // }
+        // ! how can I store the user input read from the console using pointers? such that I can use my validate_user_input function to validate that it is correct? instead of what I have below, the same function but it takes a string instead...
+
+        char user_guess[5];
+        int size;
+        label:
+        size = read(0, user_guess, sizeof(user_guess));
+
+        if (validate_user_input_string(user_guess) != true) {
+            printf("Wrong input!\n");
+            goto label;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            printf("user input: %c \n", user_guess[i]);
+        }
 
         printf("code was good, going to next round\n");
 

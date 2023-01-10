@@ -51,6 +51,7 @@ bool validate_user_input(char* param) {
         return false;
     }
 
+    // TODO use my_isdigit function here? or get rid of that function
     for (int i = 0; i < 4; i++) {
         if (param[i] < 48 || param[i] > 56) {
             // printf("Wrong input! Please enter a valid code\n");
