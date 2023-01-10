@@ -13,5 +13,6 @@ char generate_number();
 char* generate_code(char* code);
 bool validate_user_input(char* param);
 bool validate_user_input_string(char param[]);
+int test_user_input(char* guess, char* code);
 
 #endif

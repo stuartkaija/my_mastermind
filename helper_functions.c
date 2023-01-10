@@ -76,15 +76,33 @@ bool validate_user_input_string(char param[]) {
     return true;
 }
 
-// function to compare user_guess to secret_code
-    // accepts user_guess and secret_code
-    // needs to check for and return number of correctly placed pieces and misplaced pieces
-
 int test_user_input(char* guess, char* code) {
     int well_placed = 0;
     int misplaced = 0;
+    int i, j;
 
+    //  guess is 3456, code is 1234
+    for (i = 0; i < 4; i++) {
 
+        for (j = 0; j < 4; j++) {
+            if (i == j && guess[i] == code[j]) {
+                well_placed++;
+                break;
+            }
+            if (i != j && guess[i] == code[j]) {
+                misplaced++;
+                break;
+            }
+
+        }
+        
+        if (well_placed == 4) {
+            printf("victory!\n");
+            return 0;
+        }
+    }
+
+    printf("well_placed: %d\nmisplaced: %d\n", well_placed, misplaced);
 
     return 0;
 }
