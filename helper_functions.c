@@ -81,7 +81,7 @@ int test_user_input(char* guess, char* code) {
     int misplaced = 0;
     int i, j;
 
-    //  guess is 3456, code is 1234
+    //  guess is 3456, code is 1212
     for (i = 0; i < 4; i++) {
 
         for (j = 0; j < 4; j++) {
@@ -89,11 +89,17 @@ int test_user_input(char* guess, char* code) {
                 well_placed++;
                 break;
             }
-            if (i != j && guess[i] == code[j]) {
-                misplaced++;
+            
+            if (i != j && guess[i] == code[i]) {
+                well_placed++;
                 break;
             }
 
+            if (i != j && guess[i] == code[j]) {
+                printf("is this doing anything?\n");
+                misplaced++;
+                break;
+            }
         }
         
         if (well_placed == 4) {
