@@ -96,19 +96,19 @@ int test_user_input(char* guess, char* code) {
             }
 
             if (i != j && guess[i] == code[j]) {
-                printf("is this doing anything?\n");
+                // printf("is this doing anything?\n");
                 misplaced++;
                 break;
             }
         }
         
         if (well_placed == 4) {
-            printf("victory!\n");
+            // printf("Congratz! You did it!\n");
             return 0;
         }
     }
 
-    printf("well_placed: %d\nmisplaced: %d\n", well_placed, misplaced);
+    printf("well_placed: %d\nmisplaced: %d\n---\n", well_placed, misplaced);
 
-    return 0;
+    return 1;
 }

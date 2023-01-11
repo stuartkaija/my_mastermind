@@ -1,7 +1,5 @@
 #include "my_mastermind.h"
 
-// ./my_mastermind -c "0123" -t 6
-
 int main(int ac, char **av) {
     // * blah blah
     // ! alert
@@ -65,48 +63,29 @@ int main(int ac, char **av) {
     while (attempts < rounds) {
         printf("Round %d\n", attempts);
 
-        // char c;
-        // char* user_guess = malloc(4 * sizeof(char));
-        // int i = 0;
-        // label:
-
-        // while (c != 10) {
-        //     read(0, &c, 1);
-        //     user_guess[i] = c;
-        //     i++;
-        // }
-
-        // if (validate_user_input(user_guess) != true) {
-        //     printf("Wrong input!\n");
-        //     goto label;
-        // }
-
-        // ! how can I store the user input read from the console using pointers? such that I can use my validate_user_input function to validate that it is correct? instead of what I have below, the same function but it takes a string instead...
-
         char user_guess[5];
         int size;
         label:
         size = read(0, user_guess, sizeof(user_guess));
 
-        if (validate_user_input_string(user_guess) != true) {
+        if (validate_user_input_string(user_guess) == true) {
+            if (test_user_input(user_guess, secret_code) == 0) {
+                printf("Congratz! You did it!\n");
+                return 0;
+            }
+        } else {
             printf("Wrong input!\n");
             goto label;
         }
-
-        // for (int i = 0; i < 4; i++) {
-        //     printf("user input: %c \n", user_guess[i]);
-        // }
-
-        // printf("code was good, going to next round\n");
-
-        // char* guess = "3212";
-        // char* code = "1234";
-
-        test_user_input(user_guess, code);
-
-        // TODO change back to simple incrementing i.e. attempts++;
+        
         attempts++;
     }
+
+    printf("KO! Game over! You did NOT find the secret code...the secret code was: ");
+    for (int i = 0; i < strlen(secret_code); i++) {
+        printf("%c", secret_code[i]);
+    }
+    printf("\n");
 
     return 0;
 }
