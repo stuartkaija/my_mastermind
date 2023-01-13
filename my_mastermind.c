@@ -33,30 +33,11 @@ int main(int ac, char **av) {
         }
 
         if (strcmp(av[i], "-t") == 0) {
-            printf("-t flag present\n");
-            printf("after the t flag is %s\n", av[i + 1]);
-            printf("a to i av[i+1] is %d\n", atoi(av[i + 1]));
-
-            // if av[i + 1] is a number, it's valid for rounds - how do we check if av[i + 1] is a number...
-            if (atoi(av[i + 1] > 0) && atoi(av[i + 1]) < 10) {
-                printf("av[i + 1] is %s\n", av[i + 1]);
-                printf("atoi(av[i + 1]) %d\n", atoi(av[i + 1]));
-            }
-
-
-            if (is_valid_rounds(av[i + 1]) == true) {
+            if (is_valid_rounds(atoi(av[i + 1])) == true) {
                 printf("valid rounds\n");
                 rounds = atoi(av[i + 1]);
             } else {
-                printf("not valid rounds\n");
-            }
-            if (atoi(av[i + 1]) > 0 || atoi(av[i + 1]) < 10) {
-                printf("atoi(av[i + 1]) is %d", atoi(av[i + 1]));
-                printf("%s is valid rounds\n", av[i + 1]);
-                // rounds = 5;
-                // printf("ROUNDS SET TO %d\n", rounds);
-            } else {
-                printf("%s not valid rounds\n", av[i + 1]);
+                printf("Not valid rounds - rounds will be set to 10.\n");
             }
         }
     }

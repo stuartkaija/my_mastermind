@@ -10,17 +10,12 @@ bool my_isdigit(char character) {
     }
 }
 
-bool is_valid_rounds(char *num) {
-    int i = 0;
-
-    while (num[i] != '\n') {
-        if (num[i] < 48 || num[i] > 56) {
-            return false;
-        }
-        i++;
+bool is_valid_rounds(int num) {
+    if (num > 0 && num < 10) {
+        return true;
+    } else {
+        return false;
     }
-
-    return true;
 }
 
 // validate user input to be 4 numbers *** make change to if statement 
