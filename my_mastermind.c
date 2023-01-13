@@ -1,11 +1,6 @@
 #include "my_mastermind.h"
 
 int main(int ac, char **av) {
-    // * blah blah
-    // ! alert
-    // ? what up
-    // TODO
-
     char* code = malloc(4 * sizeof(char));
     char* secret_code = malloc(4 * sizeof(char));
     int rounds = 10;
@@ -44,9 +39,9 @@ int main(int ac, char **av) {
 
     // * PRINTING SECRET CODE TO CONSOLE ---------------------------------------------------------------
     // TODO remove for game
-    printf("secret code: ASCII values\n");
+    printf("secret code: ");
     for (int i = 0; i < strlen(secret_code); i++) {
-        printf("%c:%d ", secret_code[i], secret_code[i]);
+        printf("%c", secret_code[i]);
     }
     printf("\n");
 
@@ -55,7 +50,6 @@ int main(int ac, char **av) {
     printf("Will you find the secret code?\nPlease enter a valid guess.\n---\n");
 
     int attempts = 0;
-    // rounds = 10;
 
     while (attempts < rounds) {
         printf("Round %d\n", attempts);
