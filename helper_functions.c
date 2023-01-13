@@ -18,21 +18,6 @@ bool is_valid_rounds(int num) {
     }
 }
 
-// validate user input to be 4 numbers *** make change to if statement 
-// int my_strlen(const char *param_1) {
-//     int count = 0;
-
-//     while (*param_1 != '\0') {
-//         count++;
-//         param_1++;
-//         if (count > 100) {
-//             break;
-//         }
-//     }
-
-//     return count;
-// }
-
 // generate random number
 char generate_number() {
     char num = rand() % (56 - 48 + 1 ) + 48;
@@ -50,9 +35,7 @@ char* generate_code(char* param) {
     return param;
 }
 
-// validate user input
-// accepts user input, checks that it has a length of four and is composed of digits between/including 0 and 8
-
+// validate user input for setting secret code
 bool validate_user_input(char* param) {
     if (strlen(param) != 4) {
         // printf("Wrong input! Please enter a valid code\n");
@@ -71,13 +54,11 @@ bool validate_user_input(char* param) {
 
 bool validate_user_input_string(char param[]) {
     if (strlen(param) != 5) {
-    // printf("Wrong input! Please enter a valid code\n");
         return false;
     }
 
     for (int i = 0; i < 4; i++) {
         if (param[i] < 48 || param[i] > 56) {
-            // printf("Wrong input! Please enter a valid code\n");
             return false;
         }
     }
@@ -89,7 +70,6 @@ int test_user_input(char* guess, char* code) {
     int misplaced = 0;
     int i, j;
 
-    //  guess is 3456, code is 1212
     for (i = 0; i < 4; i++) {
 
         for (j = 0; j < 4; j++) {
@@ -104,14 +84,12 @@ int test_user_input(char* guess, char* code) {
             }
 
             if (i != j && guess[i] == code[j]) {
-                // printf("is this doing anything?\n");
                 misplaced++;
                 break;
             }
         }
         
         if (well_placed == 4) {
-            // printf("Congratz! You did it!\n");
             return 0;
         }
     }
