@@ -14,7 +14,7 @@ int main(int ac, char **av) {
     for (int i = 1; i < ac; i++) {
         if (strcmp(av[i], "-c") == 0) {
             if (validate_user_input(av[i + 1]) == true) {
-                // printf("%s is valid code\n", av[i + 1]);
+                printf("Code set successfully!\n");
                 int j = 0;
                 while (j < 4) {
                     code[j] = av[i + 1][j];
@@ -22,7 +22,7 @@ int main(int ac, char **av) {
                 }
                 secret_code = code;
             } else if (validate_user_input(av[i + 1]) == false) {
-                // printf("%s is not a valid code\n", av[i + 1]);
+                printf("%s is not a valid code, code will be generated randomly\n", av[i + 1]);
                 secret_code = generate_code(code);
             }
         }
