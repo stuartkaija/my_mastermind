@@ -8,7 +8,8 @@
 #include <unistd.h>
 
 bool my_isdigit(char character);
-int my_strlen(const char *param_1);
+bool is_valid_rounds(char *num);
+// int my_strlen(const char *param_1);
 char generate_number();
 char* generate_code(char* code);
 bool validate_user_input(char* param);

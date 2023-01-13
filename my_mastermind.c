@@ -8,41 +8,57 @@ int main(int ac, char **av) {
 
     char* code = malloc(4 * sizeof(char));
     char* secret_code = malloc(4 * sizeof(char));
-
-    // * DEALING WITH COMMAND LINE INPUTS --------------------------------------------------------------
+    int rounds = 10;
 
     if (ac == 1) {
-        printf("only 1 argument passed i.e. ./my_mastermind\n");
+        printf("only 1 argument passed, code generated randomly\n");
         secret_code = generate_code(code);
-    } else if (ac == 3) {
-        // av[1] == "-c" || av[1] == "-t"
-        for (int i = 1; i < ac - 1; i++) {
-            if (strcmp(av[i], "-c") == 0) {
-                if (validate_user_input(av[i + 1]) == true) {
-                    printf("%s is valid input! \n", av[i + 1]);
-                    // set code to user inputted code
-                    int j = 0;
-                    while (j < 4) {
-                        code[j] = av[2][j];
-                        j++;
-                    }
-                    secret_code = code;
-                } else {
-                    printf("%s is invalid! generating random code\n", av[i + 1]);
-                    secret_code = generate_code(code);
+    }
+
+    // * DEALING WITH COMMAND LINE INPUTS --------------------------------------------------------------
+    for (int i = 1; i < ac; i++) {
+        if (strcmp(av[i], "-c") == 0) {
+            if (validate_user_input(av[i + 1]) == true) {
+                printf("%s is valid code\n", av[i + 1]);
+                int j = 0;
+                while (j < 4) {
+                    code[j] = av[i + 1][j];
+                    j++;
                 }
-            } else {
-                printf("no -c flag present! generating random code\n");
+                secret_code = code;
+            } else if (validate_user_input(av[i + 1]) == false) {
+                printf("%s is not a valid code\n", av[i + 1]);
                 secret_code = generate_code(code);
             }
         }
-    } else if (ac == 5) {
-        // av[1] == "-c" && av[3] == "-t"
-        // validate av[2] and av[4]
-        printf("5 arguments passed\n");
-    } else {
-        printf("incorrect number of arguments passed to command line\n");
-        return 1;
+
+        if (strcmp(av[i], "-t") == 0) {
+            printf("-t flag present\n");
+            printf("after the t flag is %s\n", av[i + 1]);
+            printf("a to i av[i+1] is %d\n", atoi(av[i + 1]));
+
+            // if av[i + 1] is a number, it's valid for rounds - how do we check if av[i + 1] is a number...
+            if (atoi(av[i + 1] > 0) && atoi(av[i + 1]) < 10) {
+                printf("av[i + 1] is %s\n", av[i + 1]);
+                printf("atoi(av[i + 1]) %d\n", atoi(av[i + 1]));
+            }
+
+
+            if (is_valid_rounds(av[i + 1]) == true) {
+                printf("valid rounds\n");
+                rounds = atoi(av[i + 1]);
+            } else {
+                printf("not valid rounds\n");
+            }
+            if (atoi(av[i + 1]) > 0 || atoi(av[i + 1]) < 10) {
+                printf("atoi(av[i + 1]) is %d", atoi(av[i + 1]));
+                printf("%s is valid rounds\n", av[i + 1]);
+                // rounds = 5;
+                // printf("ROUNDS SET TO %d\n", rounds);
+            } else {
+                printf("%s not valid rounds\n", av[i + 1]);
+            }
+        }
     }
 
     // * PRINTING SECRET CODE TO CONSOLE ---------------------------------------------------------------
@@ -58,12 +74,12 @@ int main(int ac, char **av) {
     printf("Will you find the secret code?\nPlease enter a valid guess.\n---\n");
 
     int attempts = 0;
-    int rounds = 10;
+    // rounds = 10;
 
     while (attempts < rounds) {
         printf("Round %d\n", attempts);
 
-        char user_guess[5];
+        char user_guess[128];
         int size;
         label:
         size = read(0, user_guess, sizeof(user_guess));
@@ -74,7 +90,7 @@ int main(int ac, char **av) {
                 return 0;
             }
         } else {
-            printf("Wrong input!\n");
+            printf("Wrong input, user_guess: %s\n", user_guess);
             goto label;
         }
         
@@ -89,8 +105,6 @@ int main(int ac, char **av) {
 
     return 0;
 }
-
-
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
 // PROMPT>./my_mastermind -c "0123"

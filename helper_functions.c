@@ -10,20 +10,33 @@ bool my_isdigit(char character) {
     }
 }
 
-// validate user input to be 4 numbers *** make change to if statement 
-int my_strlen(const char *param_1) {
-    int count = 0;
+bool is_valid_rounds(char *num) {
+    int i = 0;
 
-    while (*param_1 != '\0') {
-        count++;
-        param_1++;
-        if (count > 100) {
-            break;
+    while (num[i] != '\n') {
+        if (num[i] < 48 || num[i] > 56) {
+            return false;
         }
+        i++;
     }
 
-    return count;
+    return true;
 }
+
+// validate user input to be 4 numbers *** make change to if statement 
+// int my_strlen(const char *param_1) {
+//     int count = 0;
+
+//     while (*param_1 != '\0') {
+//         count++;
+//         param_1++;
+//         if (count > 100) {
+//             break;
+//         }
+//     }
+
+//     return count;
+// }
 
 // generate random number
 char generate_number() {
@@ -46,7 +59,7 @@ char* generate_code(char* param) {
 // accepts user input, checks that it has a length of four and is composed of digits between/including 0 and 8
 
 bool validate_user_input(char* param) {
-    if (my_strlen(param) != 4) {
+    if (strlen(param) != 4) {
         // printf("Wrong input! Please enter a valid code\n");
         return false;
     }
