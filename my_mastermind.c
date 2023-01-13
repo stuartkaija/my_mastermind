@@ -61,7 +61,27 @@ int main(int ac, char **av) {
         char user_guess[128];
         int size;
         label:
-        size = read(0, user_guess, sizeof(user_guess));
+        // size = read(0, user_guess, sizeof(user_guess));
+        size = read(0, user_guess, 5);
+
+        printf("size: %d\n", size);
+        printf("user_guess: %s\n", user_guess);
+
+        if (size == -1) {
+            printf("ERROR OCCURRED\n");
+            goto label;
+        } else if (size == 0) {
+            printf("EOT\n");
+            break;
+        } else if (size == 1) {
+            printf("right amount\n");
+        }
+
+        // ! below is original
+        // if (size == 4) {
+        //     printf("exiting program with ctrl d\n");
+        //     break;
+        // }
 
         if (validate_user_input_string(user_guess) == true) {
             if (test_user_input(user_guess, secret_code) == 0) {
