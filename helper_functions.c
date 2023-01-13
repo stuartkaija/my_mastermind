@@ -1,6 +1,5 @@
 #include "my_mastermind.h"
 
-// validate that user input is a digit
 bool my_isdigit(char character) {
     int targetInt = (int)character;
     if (targetInt >= 48 && targetInt <= 57) {
@@ -18,13 +17,11 @@ bool is_valid_rounds(int num) {
     }
 }
 
-// generate random number
 char generate_number() {
     char num = rand() % (56 - 48 + 1 ) + 48;
     return num;
 }
 
-// generate secret code
 char* generate_code(char* param) {
     int i = 0;
     srand(time(NULL));
@@ -35,17 +32,15 @@ char* generate_code(char* param) {
     return param;
 }
 
-// validate user input for setting secret code
 bool validate_user_input(char* param) {
     if (strlen(param) != 4) {
-        // printf("Wrong input! Please enter a valid code\n");
         return false;
     }
 
-    // TODO use my_isdigit function here? or get rid of that function
     for (int i = 0; i < 4; i++) {
-        if (param[i] < 48 || param[i] > 56) {
-            // printf("Wrong input! Please enter a valid code\n");
+        if (my_isdigit(param[i]) == true) {
+            return true;
+        } else {
             return false;
         }
     }

@@ -6,7 +6,7 @@ int main(int ac, char **av) {
     int rounds = 10;
 
     if (ac == 1) {
-        printf("only 1 argument passed, code generated randomly\n");
+        // printf("only 1 argument passed, code generated randomly\n");
         secret_code = generate_code(code);
     }
 
@@ -14,7 +14,7 @@ int main(int ac, char **av) {
     for (int i = 1; i < ac; i++) {
         if (strcmp(av[i], "-c") == 0) {
             if (validate_user_input(av[i + 1]) == true) {
-                printf("%s is valid code\n", av[i + 1]);
+                // printf("%s is valid code\n", av[i + 1]);
                 int j = 0;
                 while (j < 4) {
                     code[j] = av[i + 1][j];
@@ -22,28 +22,32 @@ int main(int ac, char **av) {
                 }
                 secret_code = code;
             } else if (validate_user_input(av[i + 1]) == false) {
-                printf("%s is not a valid code\n", av[i + 1]);
+                // printf("%s is not a valid code\n", av[i + 1]);
                 secret_code = generate_code(code);
             }
         }
 
         if (strcmp(av[i], "-t") == 0) {
+            if (ac == 3) {
+                secret_code = generate_code(code);
+            }
+
             if (is_valid_rounds(atoi(av[i + 1])) == true) {
                 printf("valid rounds\n");
                 rounds = atoi(av[i + 1]);
             } else {
-                printf("Not valid rounds - rounds will be set to 10.\n");
+                printf("You didn't pass valid information for rounds - rounds will be set to 10.\n");
             }
         }
     }
 
-    // * PRINTING SECRET CODE TO CONSOLE ---------------------------------------------------------------
-    // TODO remove for game
-    printf("secret code: ");
-    for (int i = 0; i < strlen(secret_code); i++) {
-        printf("%c", secret_code[i]);
-    }
-    printf("\n");
+    // COMMENT OUT FOR GAME - this prints the secret code to console -----------------------------------
+    
+    // printf("secret code: ");
+    // for (int i = 0; i < strlen(secret_code); i++) {
+    //     printf("%c", secret_code[i]);
+    // }
+    // printf("\n");
 
     // * PLAYING THE GAME ------------------------------------------------------------------------------
 
@@ -52,7 +56,7 @@ int main(int ac, char **av) {
     int attempts = 0;
 
     while (attempts < rounds) {
-        printf("Round %d\n", attempts);
+        printf("Round %d\n", attempts + 1);
 
         char user_guess[128];
         int size;
@@ -65,7 +69,8 @@ int main(int ac, char **av) {
                 return 0;
             }
         } else {
-            printf("Wrong input, user_guess: %s\n", user_guess);
+            // printf("Wrong input, user_guess: %s\n", user_guess);
+            printf("Wrong input!\n");
             goto label;
         }
         
@@ -80,24 +85,3 @@ int main(int ac, char **av) {
 
     return 0;
 }
-
-// ---------------------------------------------------------------------------------------------------------------------------------------
-// PROMPT>./my_mastermind -c "0123"
-// Will you find the secret code?
-// Please enter a valid guess
-// ---
-// Round 0
-// >1456
-// Well placed pieces: 0
-// Misplaced pieces: 1
-// ---
-// Round 1
-// >tata
-// Wrong input!
-// >4132
-// Well placed pieces: 1
-// Misplaced pieces: 2
-// ---
-// Round 2
-// >0123
-// Congratz! You did it!
