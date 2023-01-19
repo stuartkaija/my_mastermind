@@ -48,7 +48,7 @@ bool validate_user_input(char* param) {
 }
 
 bool validate_user_input_string(char param[]) {
-    if (strlen(param) != 5) {
+    if (strlen(param) != 4) {
         return false;
     }
 

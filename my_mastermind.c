@@ -65,10 +65,21 @@ int main(int ac, char **av) {
             user_guess[i] = c;
             i++;
         }
+        user_guess[i] = '\0';
 
         printf("user_guess: %s\n", user_guess);
+        // checking if user_guess is valid
+        if (validate_user_input_string(user_guess) == true) {
+            printf("user_guess is valid\n");
+            if (test_user_input(user_guess, secret_code) == 0) {
+                printf("Congratz! You did it!\n");
+                return 0;
+            }
+            attempts++;
+        } else {
+            printf("user_guess is NOT valid\n");
+        }
 
-        attempts++;
     }
 
     printf("KO! Game over! You did NOT find the secret code...the secret code was: ");
