@@ -43,11 +43,11 @@ int main(int ac, char **av) {
 
     // COMMENT OUT FOR GAME - this prints the secret code to console -----------------------------------
     
-    // printf("secret code: ");
-    // for (int i = 0; i < strlen(secret_code); i++) {
-    //     printf("%c", secret_code[i]);
-    // }
-    // printf("\n");
+    printf("secret code: ");
+    for (int i = 0; i < strlen(secret_code); i++) {
+        printf("%c", secret_code[i]);
+    }
+    printf("\n");
 
     // * PLAYING THE GAME ------------------------------------------------------------------------------
 
@@ -59,41 +59,15 @@ int main(int ac, char **av) {
         printf("Round %d\n", attempts + 1);
 
         char user_guess[128];
-        int size;
-        label:
-        // size = read(0, user_guess, sizeof(user_guess));
-        size = read(0, user_guess, 5);
+        char c;
+        int i = 0;
+        while (read(0, &c, 1) > 0 && c != '\n') {
+            user_guess[i] = c;
+            i++;
+        }
 
-        printf("size: %d\n", size);
         printf("user_guess: %s\n", user_guess);
 
-        if (size == -1) {
-            printf("ERROR OCCURRED\n");
-            goto label;
-        } else if (size == 0) {
-            printf("EOT\n");
-            break;
-        } else if (size == 1) {
-            printf("right amount\n");
-        }
-
-        // ! below is original
-        // if (size == 4) {
-        //     printf("exiting program with ctrl d\n");
-        //     break;
-        // }
-
-        if (validate_user_input_string(user_guess) == true) {
-            if (test_user_input(user_guess, secret_code) == 0) {
-                printf("Congratz! You did it!\n");
-                return 0;
-            }
-        } else {
-            // printf("Wrong input, user_guess: %s\n", user_guess);
-            printf("Wrong input!\n");
-            goto label;
-        }
-        
         attempts++;
     }
 
@@ -105,3 +79,14 @@ int main(int ac, char **av) {
 
     return 0;
 }
+
+
+// if (validate_user_input_string(user_guess) == true) {
+//     if (test_user_input(user_guess, secret_code) == 0) {
+//         printf("Congratz! You did it!\n");
+//         return 0;
+//     }
+// } else {
+//     // printf("Wrong input, user_guess: %s\n", user_guess);
+//     printf("Wrong input!\n");
+// }
