@@ -58,16 +58,24 @@ int main(int ac, char **av) {
     while (attempts < rounds) {
         printf("Round %d\n", attempts + 1);
 
-        char user_guess[128];
+        char user_guess[100];
         char c;
         int i = 0;
-        while (read(0, &c, 1) > 0 && c != '\n') {
+
+        while (read(0, &c, 1) >= 0 && c != '\n') {
             user_guess[i] = c;
+            // if (user_guess[i] == 0) {
+            //     printf("EOT\n");
+            //     return 1;
+            // }
+            // printf("user_guess[i] d, c: %d, %c\n", user_guess[i], user_guess[i]);
             i++;
         }
+
         user_guess[i] = '\0';
 
         printf("user_guess: %s\n", user_guess);
+
         // checking if user_guess is valid
         if (validate_user_input_string(user_guess) == true) {
             printf("user_guess is valid\n");
@@ -77,9 +85,21 @@ int main(int ac, char **av) {
             }
             attempts++;
         } else {
+            if (my_strlen(user_guess) == 0) {
+                printf("EOT in validation section\n");
+                return 0;
+            }
+            // loop through secret_code and check if control d was inputted i.e. if user_guess length is 0
+            for (int i = 0; i < my_strlen(user_guess); i++) {
+                printf("failed validation print, user_guess[%i]: %d\n" , i, user_guess[i]);
+            }
+
+            // if (user_guess[0] == 4) {
+            //     printf("EOT in validation section\n");
+            //     return 0;
+            // }
             printf("user_guess is NOT valid\n");
         }
-
     }
 
     printf("KO! Game over! You did NOT find the secret code...the secret code was: ");
@@ -90,14 +110,3 @@ int main(int ac, char **av) {
 
     return 0;
 }
-
-
-// if (validate_user_input_string(user_guess) == true) {
-//     if (test_user_input(user_guess, secret_code) == 0) {
-//         printf("Congratz! You did it!\n");
-//         return 0;
-//     }
-// } else {
-//     // printf("Wrong input, user_guess: %s\n", user_guess);
-//     printf("Wrong input!\n");
-// }

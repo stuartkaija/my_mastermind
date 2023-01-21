@@ -93,3 +93,18 @@ int test_user_input(char* guess, char* code) {
 
     return 1;
 }
+
+int my_strlen(const char *param_1) {
+    int count = 0;
+
+    while (*param_1 != '\0') {
+        count++;
+        param_1++;
+        if (count > 100) {
+            break;
+        }
+    }
+
+    return count;
+}
+
