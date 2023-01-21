@@ -92,6 +92,10 @@ int main(int ac, char **av) {
             // loop through secret_code and check if control d was inputted i.e. if user_guess length is 0
             for (int i = 0; i < my_strlen(user_guess); i++) {
                 printf("failed validation print, user_guess[%i]: %d\n" , i, user_guess[i]);
+                if (user_guess[i] == 0) {
+                    printf("EOT\n");
+                    return 0;
+                }
             }
 
             // if (user_guess[0] == 4) {
@@ -110,3 +114,7 @@ int main(int ac, char **av) {
 
     return 0;
 }
+
+// char guess[100];
+// while((count = read(STDIN_FILENO, guess, 100) > 0)&&rounds<attempts){
+// }
